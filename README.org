@@ -1,0 +1,18 @@
+#+TITLE: Batch-OX
+
+The Org exporter methods are intended to be used interactively while visiting an Org buffer.
+This prevents their use in scripts, such as from a project Makefile.
+Batch-OX provides the simple ~batch-ox-export~ function built on top of the base ~ox~ exporter methods to convert an Org file to another file type from outside the buffer.
+
+Example:
+#+begin_src bash
+  emacs -Q --batch \
+      --eval "(require 'batch-ox)" \
+      --eval '(batch-ox-export "example.html" "example.org")'
+#+end_src
+
+Note: ~batch-ox~ must be on the load path so you may need to pass the ~-L /path/to/batch-ox~ so emacs can find the package.
+
+In the above example, the input file ~example.org~ can be excluded since ~batch-ox~ will look for an Org file with the same name as the output file by default.
+You can also provide an ~ox~ exporter backend to override the default.
+Default backends a stored in the ~batch-ox-backend-alist~ which links file extensions to ~ox~ exporter backends and can be modified to change the default behavior.
