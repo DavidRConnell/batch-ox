@@ -39,6 +39,7 @@
     (tex . latex)
     (html . html)
     (odt . odt)
+    (md . md)
     (txt . ascii))
 
   "Default export backends for different output file extensions.")
@@ -54,7 +55,7 @@ should be used. The default is dependent on the file extension of `OUTFILE' and
 the `batch-ox-backend-plist' variable."
   (let* ((org-file (or infile (concat (file-name-sans-extension outfile) ".org")))
 	 (ext (intern (file-name-extension outfile)))
-	 (backend (or backend (alist-get ext batch-ox-backend-alist))))
+	 (backend (or backend (alist-get ext batch-ox-backend-alist) ext)))
 
     (with-temp-buffer
       (insert-file-contents org-file)
